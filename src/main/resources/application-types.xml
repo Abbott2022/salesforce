@@ -1,0 +1,25 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<types:mule xmlns:types="http://www.mulesoft.org/schema/mule/types">
+  <types:catalog>
+    <types:type name="account" format="json">
+      <types:shape format="weave" example="examples/salesforce.json"><![CDATA[%dw 2.0
+
+type account = Array<{|  Name: String,   phoneNo: String,   BillingCity: String,   BillingCountry: String|}> {"example": "[{\\\"Name\\\":\\\"arvind\\\",\\\"phoneNo\\\":\\\"970123\\\",\\\"BillingCity\\\":\\\"Hyderabad\\\",\\\"BillingCountry\\\":\\\"india\\\"}]"}
+
+]]></types:shape>
+    </types:type>
+    <types:type name="crar" format="java">
+      <types:shape format="raml"><![CDATA[#%RAML 1.0 DataType
+type: string]]></types:shape>
+    </types:type>
+  </types:catalog>
+  <types:enrichment select="#c6f62fb8-dd67-41ea-917d-2ff0b146fc3c">
+    <types:processor-declaration>
+      <types:input-event>
+        <types:message>
+          <types:payload type="account"/>
+        </types:message>
+      </types:input-event>
+    </types:processor-declaration>
+  </types:enrichment>
+</types:mule>
